@@ -17,13 +17,13 @@ app.post('/formulario',(req,res)=>{
         if(error){
             console.log(`Error: ${error}`)
         }
-        setTimeout(()=>{
+        /* setTimeout(()=>{ */
             res.download('data/id_123.txt',(error)=>{
                 if(error){
                     console.log(`Error: ${error}`)
                 }
-            })
-        },3000)
+            });
+        /* },5000) */
         
     })
 })
