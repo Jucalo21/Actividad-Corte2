@@ -8,15 +8,23 @@ app.use(express.urlencoded({extended:true}))
 
 
 app.post('/formulario',(req,res)=>{
-    console.log(req.body);
+    /* console.log(req.body); */
     const fs=require('fs');
     const {id,nombre,apellido,titulo,autor,editorial,año}=req.body
     if(!id||!nombre||!apellido||!titulo||!autor||!editorial||!año)return res.redirect('/error.html')
     res.send(`Datos Enviados...${id} - ${nombre} - ${apellido} - ${titulo} - ${autor} - ${editorial} - ${año}`)
-    fs.writeFile('id_123.txt',`${id} - ${nombre} - ${apellido} - ${titulo} - ${autor} - ${editorial} - ${año}`,(error)=>{
+    fs.writeFile('data/id_123.txt',`${id} - ${nombre} - ${apellido} - ${titulo} - ${autor} - ${editorial} - ${año}`,(error)=>{
         if(error){
             console.log(`Error: ${error}`)
         }
+        setTimeout(()=>{
+            res.download('data/id_123.txt',(error)=>{
+                if(error){
+                    console.log(`Error: ${error}`)
+                }
+            })
+        },3000)
+        
     })
 })
 
